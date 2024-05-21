@@ -18,8 +18,8 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping
-    public List<Usuario> listar() {
-        return service.listar();
+    public Map<String, List<Usuario>> listar() {
+        return Collections.singletonMap("usuarios", service.listar());
     }
 
     @GetMapping("/{id}")
@@ -40,7 +40,7 @@ public class UsuarioController {
         }
 
         if (!usuario.getEmail().isEmpty() && service.existePorEmail(usuario.getEmail())) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "El email ya se encuentra en uso"));
+            return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "El email ya se encuentra en uso!"));
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.guardar(usuario));
@@ -59,7 +59,7 @@ public class UsuarioController {
             if (!usuario.getEmail().isEmpty() &&
                     !usuario.getEmail().equalsIgnoreCase(usuarioDb.getEmail()) &&
                     service.porEmail(usuario.getEmail()).isPresent()) {
-                return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "El email ya se encuentra en uso"));
+                return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "El email ya se encuentra en uso!"));
             }
 
             usuarioDb.setNombre(usuario.getNombre());
