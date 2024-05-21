@@ -2,9 +2,9 @@
 
 `➜  ~ docker network create [NETWORK_NAME]`
 
-`➜  ~ docker run -d -p 3306:3306 --name mysql8 --network [NETWORK_NAME] -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=msvc_usuarios mysql:8`
+`➜  ~ docker run -d -p 3306:3306 --name mysql8 --network [NETWORK_NAME] -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=msvc_usuarios -v data-mysql:/var/lib/mysql --restart=always mysql:8`
 
-`➜  ~ docker run -d -p 5432:5432 --name postgres14 --network [NETWORK_NAME] -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=msvc_cursos -d postgres:14-alpine`
+`➜  ~ docker run -d -p 5432:5432 --name postgres14 --network [NETWORK_NAME] -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=msvc_cursos -d -v data-postgres:/var/lib/postgresql/data --restart=always postgres:14-alpine`
 
 `➜  ~ docker start mysql8`
 
