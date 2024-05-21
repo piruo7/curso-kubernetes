@@ -1,0 +1,6 @@
+PORT=8002
+DB_HOST=postgres14:5432
+DATA_BASE=msvc_cursos
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+USUARIOS_URL=msvc-usuarios:8001
