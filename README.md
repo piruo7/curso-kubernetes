@@ -1,12 +1,18 @@
 ### Comandos
 
-`➜  ~ docker-compose up -d`
+`➜  ~ docker network create [NETWORK_NAME]`
+
+`➜  ~ docker run -d -p 3306:3306 --name mysql8 --network [NETWORK_NAME] -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=msvc_usuarios mysql:8`
+
+`➜  ~ docker run -d -p 5432:5432 --name postgres14 --network [NETWORK_NAME] -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=msvc_cursos -d postgres:14-alpine`
+
+`➜  ~ docker start mysql8`
+
+`➜  ~ docker start postgres14`
 
 `➜  ~ docker build -t usuarios . -f ./msvc-usuarios/Dockerfile`
 
 `➜  ~ docker build -t cursos . -f ./msvc-cursos/Dockerfile`
-
-`➜  ~ docker network create [NETWORK_NAME]`
 
 `➜  ~ docker run -p 8001:8001 -d --rm --name msvc-usuarios --network [NETWORK_NAME] usuarios`
 
@@ -14,3 +20,4 @@
 
 #### Obtener logs
 `➜  ~ docker cp [CONTAINER_ID]:/app/logs ./logs`
+
